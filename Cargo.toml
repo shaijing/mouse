@@ -1,0 +1,16 @@
+[package]
+name = "mouse"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0 OR MIT"
+authors = ["Ling Yu <lingyu.lynn@outlook.com>"]
+description = "The package provides a tool to control mouse scroll event on macOS."
+readme = "README.md"
+categories = ["mouse"]
+keywords = ["macos", "mouse"]
+homepage = "https://github.com/shaijing/mouse"
+repository = "https://github.com/shaijing/mouse"
+
+[dependencies]
+core-foundation = "0.10.1"
+core-graphics = "0.25.0"
