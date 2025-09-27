@@ -14,3 +14,5 @@ repository = "https://github.com/shaijing/mouse"
 [dependencies]
 core-foundation = "0.10.1"
 core-graphics = "0.25.0"
+serde = { version = "1.0.226", features = ["derive"] }
+toml = "0.9.7"

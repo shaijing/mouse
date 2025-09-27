@@ -1,6 +1,19 @@
 # Mac OS Mouse Scroll Reverser
-
 ## Use
+### add config file
+
+```bash
+vim mouse.toml
+
+vertical_reverse = true
+horizontal_reverse = false
+scroll_sensitivity = 1
+mouse_reverse = true
+trackpad_reverse = false
+
+```
+
+### add system service
 ```bash
 vim ~/Library/LaunchAgents/com.science4ai.mouse.plist
 
