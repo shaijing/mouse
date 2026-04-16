@@ -37,8 +37,29 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_load_config() {
-        let config = Config::load_from_file("target/debug/mouse.toml").unwrap();
-        assert_eq!(config.vertical_reverse, true);
+    fn test_default_config() {
+        let config = Config::default();
+        assert!(config.vertical_reverse);
+        assert!(!config.horizontal_reverse);
+        assert_eq!(config.scroll_sensitivity, 1);
+        assert!(config.mouse_reverse);
+        assert!(!config.trackpad_reverse);
+    }
+
+    #[test]
+    fn test_parse_config() {
+        let config_content = r#"
+vertical_reverse = false
+horizontal_reverse = true
+scroll_sensitivity = 2
+mouse_reverse = false
+trackpad_reverse = true
+"#;
+        let config: Config = toml::from_str(config_content).unwrap();
+        assert!(!config.vertical_reverse);
+        assert!(config.horizontal_reverse);
+        assert_eq!(config.scroll_sensitivity, 2);
+        assert!(!config.mouse_reverse);
+        assert!(config.trackpad_reverse);
     }
 }

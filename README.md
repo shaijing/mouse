@@ -1,53 +1,59 @@
 # Mac OS Mouse Scroll Reverser
-## Use
-### add config file
+
+A macOS mouse scroll reverser tool that intercepts scroll events via Core Graphics event taps and reverses their direction based on user configuration.
+
+## Installation
 
 ```bash
-vim mouse.toml
-
-vertical_reverse = true
-horizontal_reverse = false
-scroll_sensitivity = 1
-mouse_reverse = true
-trackpad_reverse = false
-
+./install.sh
 ```
 
-### add system service
+The script will:
+- Build the release binary
+- Install to `~/.scripts/mouse/`
+- Create default config file
+- Set up LaunchAgent service
+
+**Note:** You need to grant Accessibility permissions after installation:
+- Go to System Preferences > Security & Privacy > Privacy > Accessibility
+- Add `~/.scripts/mouse/mouse` to the allowed applications
+
+## Uninstallation
+
 ```bash
-vim ~/Library/LaunchAgents/com.science4ai.mouse.plist
+./uninstall.sh
+```
 
+## Configuration
 
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-    <key>Label</key>
-    <string>com.science4ai.mouse</string>
+Edit `~/.scripts/mouse/mouse.toml`:
 
-    <key>ProgramArguments</key>
-    <array>
-        <string>/Users/ling/ws/rustWS/mouse/target/release/mouse</string>
-    </array>
+```toml
+vertical_reverse = true      # Reverse vertical scroll
+horizontal_reverse = false   # Reverse horizontal scroll
+scroll_sensitivity = 1       # Scroll speed multiplier
+mouse_reverse = true         # Apply to mouse
+trackpad_reverse = false     # Apply to trackpad
+```
 
-    <key>KeepAlive</key>
-    <true/>
+## Service Management
 
-    <key>RunAtLoad</key>
-    <true/>
+```bash
+# Check status
+launchctl list | grep mouse
 
-    <key>WorkingDirectory</key>
-    <string>/Users/ling/ws/rustWS/mouse/target/release/</string>
+# Stop service
+launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.science4ai.mouse.plist
 
-    <key>StandardOutPath</key>
-    <string>/Users/ling/Library/Logs/mouse.out</string>
+# Start service
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.science4ai.mouse.plist
 
-    <key>StandardErrorPath</key>
-    <string>/Users/ling/Library/Logs/mouse.err</string>
-</dict>
-</plist>
+# View logs
+tail -f ~/.scripts/mouse/Logs/mouse.err
+```
 
+## Build from Source
 
-launchctl load ~/Library/LaunchAgents/com.science4ai.mouse.plist
-
+```bash
+cargo build --release
 ```

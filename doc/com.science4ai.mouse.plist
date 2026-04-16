@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Label</key>
+        <string>com.science4ai.mouse</string>
+
+        <key>ProgramArguments</key>
+        <array>
+            <string>/Users/xxx/.scripts/mouse/mouse</string>
+        </array>
+
+        <key>KeepAlive</key>
+        <dict>
+            <key>SuccessfulExit</key>
+            <false />
+        </dict>
+
+        <key>RunAtLoad</key>
+        <true />
+
+        <key>WorkingDirectory</key>
+        <string>/Users/xxx/.scripts/mouse/</string>
+
+        <key>StandardOutPath</key>
+        <string>/Users/xxx/.scripts/mouse/Logs/mouse.out</string>
+
+        <key>StandardErrorPath</key>
+        <string>/Users/xxx/.scripts/mouse/Logs/mouse.err</string>
+    </dict>
+</plist>
